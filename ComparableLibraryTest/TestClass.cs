@@ -5,7 +5,7 @@ namespace ComparableLibraryTest
     public class TestClass : GeneralComparable
     {
         [ComparableProperty(Name = "Test1", Order = 2)]
-        public int Prop1 { get; set; }
+        public int? Prop1 { get; set; }
 
         [ComparableProperty(Order = 3)]
         public string Prop2 { get; set; }

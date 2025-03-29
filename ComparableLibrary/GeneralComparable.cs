@@ -38,7 +38,7 @@ namespace ComparableLibrary
             if(propValue == null)
                 return $"{propName}:";
 
-            if(typeof(bool) == propType)
+            if(propType == typeof(bool))
                 return $"{propName}:{((bool)propValue ? "1" : "0")}";
 
             if(propType.IsPrimitive || propType == typeof(string) || propType == typeof(decimal))
@@ -59,20 +59,36 @@ namespace ComparableLibrary
                 var list = ((Array)propValue).Cast<object>().Select(x => GetComparablePair(elemType, String.Empty, x, orderType));
 
                 if (orderType == ComparableCollectionType.Ordered)
-                    return $"{propName}:[{string.Join(",", list)}]";
+                    return $"{propName}:[{String.Join(",", list)}]";
                 else
-                    return $"{propName}:{list.Aggregate(0, (acc, val) => acc ^= val.GetHashCode())}";
+                {
+                    long hash = 17;
+                    foreach (var item in list)
+                    {
+                        hash = hash + item.GetHashCode() * 31;
+                    }
+
+                    return $"{propName}:{hash}";
+                }
             }
 
-            if(typeof(IEnumerable).IsAssignableFrom(propType) && propType.IsGenericType)
+            if (typeof(IEnumerable).IsAssignableFrom(propType) && propType.IsGenericType)
             {
                 var genType = propType.GetGenericArguments().FirstOrDefault();
                 var list = ((IEnumerable)propValue).Cast<object>().Select(x => GetComparablePair(genType, String.Empty, x, orderType));
 
                 if (orderType == ComparableCollectionType.Ordered)
-                    return $"{propName}:[{string.Join(",", list)}]";
+                    return $"{propName}:[{String.Join(",", list)}]";
                 else
-                    return $"{propName}:{list.Aggregate(0, (acc, val) => acc ^= val.GetHashCode())}";
+                {
+                    long hash = 17;
+                    foreach (var item in list)
+                    {
+                        hash = hash + item.GetHashCode() * 31;
+                    }
+
+                    return $"{propName}:{hash}";
+                }
             }
 
             throw new InvalidOperationException($"Unsupported property type: {propType.FullName} in {propName}");
@@ -86,7 +102,7 @@ namespace ComparableLibrary
         {
             string hashDataLine = String.Empty;
 
-            //Getting public or instance properties of class with comperable attribute
+            //Getting public or instance properties of class with comparable attribute
             var props = (this).GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
                                         .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(ComparablePropertyAttribute)))
                                         .OrderBy(x => x.GetCustomAttribute<ComparablePropertyAttribute>().Order);
@@ -103,13 +119,17 @@ namespace ComparableLibrary
                     var propName = !String.IsNullOrEmpty(attr.Name) ? attr.Name : prop.Name;
                     var orderType = attr.Type;
 
+                    //Get main type from nullable type
+                    propType = Nullable.GetUnderlyingType(propType) ?? propType;
+
+                    //Construct string for hashe from each props
                     sb.Append(GetComparablePair(propType, propName, propValue, orderType));
                 }
             }
 
             var dataStr = sb.ToString();
 
-            //Create hash sum by comperable properties using MurmurHash3
+            //Create hash sum by comparable properties using MurmurHash3
             if (!String.IsNullOrEmpty(dataStr))
             {
                 var murmurHash = MurmurHash3Factory.Instance.Create();
@@ -118,20 +138,29 @@ namespace ComparableLibrary
                 return BitConverter.ToString(hashBytes).Replace("-", "");
             }
             else
-                return dataStr;
+                return null;
         }
     }
 
     /// <summary>
-    /// Attribute for comperable properties
+    /// Attribute for comparable properties
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class ComparablePropertyAttribute : Attribute
     {
+        /// <summary>
+        /// Name of property
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Serial number of property
+        /// </summary>
         public int Order { get; set; }
 
+        /// <summary>
+        /// Type of comparable collection (use only for collection ordered or unordered)
+        /// </summary>
         public ComparableCollectionType Type { get; set; }
 
         public ComparablePropertyAttribute(int order = int.MaxValue, string name = null, ComparableCollectionType type = ComparableCollectionType.Ordered)
@@ -143,7 +172,7 @@ namespace ComparableLibrary
     }
 
     /// <summary>
-    /// Comperable type for collection, collection should be compare as ordered or as unordered 
+    /// Comparable type for collection, collection should be compare as ordered or as unordered 
     /// </summary>
     public enum ComparableCollectionType
     {
