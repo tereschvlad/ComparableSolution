@@ -1,5 +1,5 @@
 # ComparableSolution
-This soulution was realise for demonstrate how to solving issue how to compare two object by value. For this was created general class GeneralComparable wich give an opportunity to get a hash from significant fields forwarding this hash can be comparable.
+This solution was created to demonstrate how to compare two objects by value. For this was created general class GeneralComparable wich give an opportunity to get a hash from significant fields forwarding this hash can be comparable.
 
 Project was realized on C#. Algoritm for hashing MurmurHash3, used System.Data.HashFunction.MurmurHash nuget
 
