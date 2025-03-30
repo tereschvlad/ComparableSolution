@@ -3,7 +3,7 @@ This solution was created to demonstrate how to compare two objects by value. Fo
 
 Project was realized on C#. Algoritm for hashing MurmurHash3, used System.Data.HashFunction.MurmurHash nuget
 
-# Opportunities
+# Features
 
 The class GeneralComparable gives an opportunities for comparing several objects by hash of significant fields. 
 For getting hash need inheritance your classes, set marks on properties wich need compare adding attribute ComparablePropertyAttribute.
@@ -12,7 +12,7 @@ ComparablePropertyAttribute properties:
 - Order - need to set up sequence number of property for put up properties in the same order in several classes (firstly processed properties wich have this next without)
 - Type - using only for collection. By ordered and unordered collections. Hash struct differently for ordered and unordered collections.
 
-GeneralComparable have property for saving hash HashSum.
+GeneralComparable has property for saving hash HashSum.
 
 ## Example how working it working. Class SampleComparable is inheritanced GeneralComparable. More examples can see in project for testing ComparableLibraryTest
 ```C#
