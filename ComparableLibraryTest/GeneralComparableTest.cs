@@ -110,6 +110,5 @@ namespace ComparableLibraryTest
 
             Assert.Equal(obj1.HashSum, obj2.HashSum);
         }
-
     }
 }

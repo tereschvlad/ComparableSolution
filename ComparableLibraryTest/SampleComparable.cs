@@ -37,7 +37,7 @@ namespace ComparableLibraryTest
         public double DoubleProperty { get; set; }
         public string SimpleText { get; set; }
 
-        [ComparableProperty(type: ComparableCollectionType.Unordered)]
+        [ComparableProperty(type: ComparableCollectionType.Ordered)]
         public List<AlternativeComparable> AlternativeOrderList { get; set; }
 
         [ComparableProperty(type: ComparableCollectionType.Unordered)]
