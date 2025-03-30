@@ -14,8 +14,7 @@ ComparablePropertyAttribute properties:
 
 GeneralComparable have property for saving hash HashSum.
 
-How to work with GeneralComparable class presented in testing project ComparableLibraryTest in GeneralComparableTest.
-
+## Example how working it working. Class SampleComparable is inheritanced GeneralComparable. More examples can see in project for testing ComparableLibraryTest
 ```C#
 public void HashSum_Should_Be_Same_For_Identical_Objects()
 {
