@@ -1,16 +1,16 @@
 # ComparableSolution
-This solution was created to demonstrate how to compare two objects by value. For this was created general class GeneralComparable wich give an opportunity to get a hash from significant fields forwarding this hash can be comparable.
+This solution was created to demonstrate how to compare two objects by value. For this was created general class GeneralComparable which provides a way to generate a hash from significant fields allowing objects to be compared using this hash.
 
-Project was realized on C#. Algoritm for hashing MurmurHash3, used System.Data.HashFunction.MurmurHash nuget
+The project was implemented in C# using the System.Data.HashFunction.MurmurHash NuGet package for hashing with the MurmurHash3 algorithm.
 
 # Features
 
-The class GeneralComparable gives an opportunities for comparing several objects by hash of significant fields. 
-For getting hash need inheritance your classes, set marks on properties wich need compare adding attribute ComparablePropertyAttribute.
+The class GeneralComparable provides an opportunity to compare multiple objects by generating a hash from significant fields.
+To generate a hash, your classes need to inherit from GeneralComparable and mark properties that need to be compared using the ComparablePropertyAttribute.
 ComparablePropertyAttribute properties:
-- Name - need to set for compare several objects different type (default set up the name of property)
-- Order - need to set up sequence number of property for put up properties in the same order in several classes (firstly processed properties wich have this next without)
-- Type - using only for collection. By ordered and unordered collections. Hash struct differently for ordered and unordered collections.
+- Name - Needs to be set to compare objects of different types (default: uses the name of the property).
+- Order - Defines the sequence number for ordering properties in multiple classes to ensure they are processed in the same order. Properties with this attribute are processed first, followed by those without it.
+- Type - Used only for collections. It distinguishes between ordered and unordered collections, and the hash structure differs accordingly.
 
 GeneralComparable has property for saving hash HashSum.
 
