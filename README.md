@@ -3,6 +3,11 @@ This solution was created to demonstrate how to compare two objects by value. Fo
 
 The project was implemented in C# using the System.Data.HashFunction.MurmurHash NuGet package for hashing with the MurmurHash3 algorithm.
 
+#Instalation
+```
+dotnet add package ComparableLibrary --version 1.0.0
+```
+
 # Features
 
 The class GeneralComparable provides an opportunity to compare multiple objects by generating a hash from significant fields.
