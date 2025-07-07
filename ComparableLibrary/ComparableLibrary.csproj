@@ -4,7 +4,31 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
+	<PackageId>ComparableLibrary</PackageId>
+	<Version>1.0.0</Version>
+	<Description>Solution for comparing objects by their values.</Description>
+	<Authors>tereschvlad</Authors>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<PackageProjectUrl>https://github.com/tereschvlad/ComparableSolution</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/tereschvlad/ComparableSolution</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+	<None Include="..\LICENSE">
+	  <Pack>True</Pack>
+	  <PackagePath>\</PackagePath>
+	</None>
+	<None Include="..\NOTICE">
+	  <Pack>True</Pack>
+	  <PackagePath>\</PackagePath>
+	</None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Data.HashFunction.MurmurHash" Version="2.0.0" />
