@@ -58,18 +58,10 @@ namespace ComparableLibrary
                 var elemType = propType.GetElementType();
                 var list = ((Array)propValue).Cast<object>().Select(x => GetComparablePair(elemType, String.Empty, x, orderType));
 
-                if (orderType == ComparableCollectionType.Ordered)
-                    return $"{propName}:[{String.Join(",", list)}]";
-                else
-                {
-                    long hash = 17;
-                    foreach (var item in list)
-                    {
-                        hash = hash + item.GetHashCode() * 31;
-                    }
+                if(orderType == ComparableCollectionType.Unordered)
+                    list = list.OrderBy(x => x);
 
-                    return $"{propName}:{hash}";
-                }
+                return $"{propName}:[{String.Join(",", list)}]";
             }
 
             if (typeof(IEnumerable).IsAssignableFrom(propType) && propType.IsGenericType)
@@ -77,18 +69,10 @@ namespace ComparableLibrary
                 var genType = propType.GetGenericArguments().FirstOrDefault();
                 var list = ((IEnumerable)propValue).Cast<object>().Select(x => GetComparablePair(genType, String.Empty, x, orderType));
 
-                if (orderType == ComparableCollectionType.Ordered)
-                    return $"{propName}:[{String.Join(",", list)}]";
-                else
-                {
-                    long hash = 17;
-                    foreach (var item in list)
-                    {
-                        hash = hash + item.GetHashCode() * 31;
-                    }
+                if(orderType == ComparableCollectionType.Unordered)
+                    list = list.OrderBy(x => x);
 
-                    return $"{propName}:{hash}";
-                }
+                return $"{propName}:[{String.Join(",", list)}]";
             }
 
             throw new InvalidOperationException($"Unsupported property type: {propType.FullName} in {propName}");
