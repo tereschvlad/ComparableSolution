@@ -61,4 +61,135 @@ namespace ComparableLibraryTest
         [ComparableProperty(1, "NestedText")]
         public string CustomText { get; set; }
     }
+
+    public sealed class Person : IGeneralComparable
+    {
+        [ComparableProperty(Order = 0)]
+        public int Id { get; set; }
+
+        [ComparableProperty(Order = 1)]
+        public string Name { get; set; }
+    }
+
+    public sealed class TagSet : IGeneralComparable
+    {
+        [ComparableProperty(Order = 0, Type = ComparableCollectionType.Unordered)]
+        public List<string> Tags { get; set; } = new();
+    }
+
+    public sealed class Sequence : IGeneralComparable
+    {
+        [ComparableProperty(Order = 0, Type = ComparableCollectionType.Ordered)]
+        public List<string> Items { get; set; } = new();
+    }
+
+    public sealed class NameMappedA : IGeneralComparable
+    {
+        [ComparableProperty(Order = 0, Name = "Key")]
+        public string KeyAA { get; set; }
+    }
+
+    public sealed class NameMappedB : IGeneralComparable
+    {
+        [ComparableProperty(Order = 0, Name = "Key")]
+        public string KeyBB { get; set; }
+    }
+
+    public sealed class Numbers : IGeneralComparable
+    {
+        [ComparableProperty(Order = 0)]
+        public int I { get; set; }
+
+        [ComparableProperty(Order = 1)]
+        public double D { get; set; }
+    }
+
+    public sealed class OrderableItem : IGeneralComparable
+    {
+        [ComparableProperty(Order = 0)]
+        public int Id { get; set; }
+
+        [ComparableProperty(Order = 1)]
+        public string Name { get; set; }
+    }
+
+    public sealed class OrderedComplexList : IGeneralComparable
+    {
+        [ComparableProperty(Order = 0, Type = ComparableCollectionType.Ordered)]
+        public List<OrderableItem> Items { get; set; } = new();
+    }
+
+    public class NullableScalars : IGeneralComparable
+    {
+        [ComparableProperty(Order = 0)]
+        public int? I { get; set; }
+
+        [ComparableProperty(Order = 1)]
+        public string S { get; set; }
+
+        [ComparableProperty(Order = 2)]
+        public DateTime? Dt { get; set; }
+    }
+
+    public class ParentWithChild : IGeneralComparable
+    {
+        [ComparableProperty(Order = 0)]
+        public Child ChildA { get; set; }
+
+        public class Child : IGeneralComparable
+        {
+            [ComparableProperty(Order = 0)]
+            public string Name { get; set; }
+
+            [ComparableProperty(Order = 1)]
+            public int? Age { get; set; }
+        }
+    }
+
+    public class UnorderedNullableList : IGeneralComparable
+    {
+        [ComparableProperty(Order = 0, Type = ComparableCollectionType.Unordered)]
+        public List<string> Items { get; set; } = new();
+    }
+
+    public class OrderedNullableComplexList : IGeneralComparable
+    {
+        [ComparableProperty(Order = 0, Type = ComparableCollectionType.Ordered)]
+        public List<Item> Items { get; set; } = new();
+
+        public class Item : IGeneralComparable
+        {
+            [ComparableProperty(Order = 0)]
+            public int? Id { get; set; }
+
+            [ComparableProperty(Order = 1)]
+            public string Name { get; set; }
+        }
+    }
+
+    // Inheritance hierarchy with public types
+    public class BaseModel : IGeneralComparable
+    {
+        [ComparableProperty(Order = 0)]
+        public int? Id { get; set; }
+    }
+
+    public class DerivedModel : BaseModel
+    {
+        [ComparableProperty(Order = 1)]
+        public string Extra { get; set; }
+    }
+
+    // Cross-type mapping using ComparableProperty.Name with nullables
+    public class NameMappedAA : IGeneralComparable
+    {
+        [ComparableProperty(Order = 0, Name = "Key")]
+        public string KeyA { get; set; }
+    }
+
+    public class NameMappedBB : IGeneralComparable
+    {
+        [ComparableProperty(Order = 0, Name = "Key")]
+        public string KeyB { get; set; }
+    }
 }
