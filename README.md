@@ -3,7 +3,7 @@ This solution was created to demonstrate how to compare two objects by value. Fo
 
 The project was implemented in C# using the `System.Data.HashFunction.MurmurHash` NuGet package for hashing with the MurmurHash3 algorithm.
 
-## Core Idea (no class renaming or refactoring required)
+## Core Idea
 
 - Use the existing **`IGeneralComparable`** marker interface (already in this repo).
 - Annotate only those properties that should affect comparison with **`ComparablePropertyAttribute`**.
