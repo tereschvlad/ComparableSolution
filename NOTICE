@@ -1,13 +1,13 @@
-
 NOTICE
 
-This project includes the following third-party open-source software:
+This project uses the following third-party open-source software:
 
 ---
 
-1. System.Data.HashFunction.MurmurHash
+1. System.IO.Hashing
+   Used for the XxHash128 implementation.
    License: MIT License
-   Source: https://github.com/Data-Forge/System.Data.HashFunction
+   Source: https://github.com/dotnet/runtime
 
 ---
 
@@ -35,4 +35,4 @@ This project includes the following third-party open-source software:
 
 ---
 
-Each of these components is subject to its own license terms. Your use of the source code and binaries from these projects is governed by their respective licenses.
+Each component is governed by its own license terms.
