@@ -112,6 +112,7 @@ namespace ComparableLibraryTest
             Assert.Equal(obj1.HashSum, obj2.HashSum);
         }
 
+        [Fact]
         public void HashSum_Should_Compare_For_Similar_But_Different_Classes_Through_Interfaces()
         {
             var obj1 = new NestedComparable { NestedText = "Test", NestedNumber = 100 };

@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using System.Data.HashFunction.MurmurHash;
 using System.Globalization;
 using System.Reflection;
 using System.Text;
+using System.IO.Hashing;
 
 namespace ComparableLibrary.Utils
 {
@@ -50,9 +50,7 @@ namespace ComparableLibrary.Utils
             //Create hash sum by comparable properties using MurmurHash3
             if (!String.IsNullOrEmpty(dataStr))
             {
-                var murmurHash = MurmurHash3Factory.Instance.Create();
-                byte[] hashBytes = murmurHash.ComputeHash(Encoding.UTF8.GetBytes(dataStr)).Hash;
-
+                byte[] hashBytes = XxHash128.Hash(Encoding.UTF8.GetBytes(dataStr));
                 return BitConverter.ToString(hashBytes).Replace("-", "");
             }
             else
