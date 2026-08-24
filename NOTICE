@@ -5,31 +5,25 @@ This project includes the following third-party open-source software:
 
 ---
 
-1. System.Data.HashFunction.MurmurHash
-   License: MIT License
-   Source: https://github.com/Data-Forge/System.Data.HashFunction
-
----
-
-2. coverlet.collector
+1. coverlet.collector
    License: MIT License
    Source: https://github.com/coverlet-coverage/coverlet
 
 ---
 
-3. Microsoft.NET.Test.Sdk
+2. Microsoft.NET.Test.Sdk
    License: MIT License
    Source: https://github.com/microsoft/vstest
 
 ---
 
-4. xUnit
+3. xUnit
    License: Apache License 2.0
    Source: https://github.com/xunit/xunit
 
 ---
 
-5. xunit.runner.visualstudio
+4. xunit.runner.visualstudio
    License: Apache License 2.0
    Source: https://github.com/xunit/visualstudio.xunit
 
