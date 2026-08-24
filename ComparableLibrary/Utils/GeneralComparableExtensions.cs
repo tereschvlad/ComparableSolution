@@ -47,7 +47,7 @@ namespace ComparableLibrary.Utils
 
             var dataStr = sb.ToString();
 
-            //Create hash sum by comparable properties using MurmurHash3
+            // Create a hash from comparable properties using XxHash128
             if (!String.IsNullOrEmpty(dataStr))
             {
                 byte[] hashBytes = XxHash128.Hash(Encoding.UTF8.GetBytes(dataStr));
